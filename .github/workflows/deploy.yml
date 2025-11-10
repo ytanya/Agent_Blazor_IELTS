@@ -1,8 +1,8 @@
-name: Deploy Blazor WASM to Azure Static Web Apps
+name: Deploy Blazor WASM to Azure Static Web Apps 
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
     types: [ opened, synchronize, reopened ]
 
