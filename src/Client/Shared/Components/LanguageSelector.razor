@@ -1,7 +1,7 @@
 ﻿@using BlazorHero.CleanArchitecture.Shared.Constants.Localization
 @inject Microsoft.Extensions.Localization.IStringLocalizer<LanguageSelector> _localizer
 
-<MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+<MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" TransformOrigin="Origin.TopCenter" AnchorOrigin="Origin.BottomCenter" Dense="true">
     @foreach (var language in LocalizationConstants.SupportedLanguages)
     {
         <MudMenuItem OnClick="(()=> ChangeLanguageAsync(language.Code))">@_localizer[language.DisplayName]</MudMenuItem>

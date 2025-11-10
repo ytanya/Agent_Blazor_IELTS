@@ -125,7 +125,7 @@ else
                         <MudTd DataLabel="@_localizer["Actions"]" Style="text-align: right">
                             @if ((_canEditExtendedAttributes || _canDeleteExtendedAttributes) && CurrentUserId == context.CreatedBy)
                             {
-                                <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                                <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" AnchorOrigin="Origin.CenterRight">
                                     @if (context.CreatedBy == CurrentUserId)
                                     {
                                         @if (_canEditExtendedAttributes)
