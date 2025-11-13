@@ -75,4 +75,4 @@ jobs:
         with:
           app-name: blazor-api-ielts
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_API }}
-          package: output/api
+          package: ./output/api
