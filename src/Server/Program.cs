@@ -19,20 +19,34 @@ namespace BlazorHero.CleanArchitecture.Server
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-
+                var configuration = services.GetRequiredService<IConfiguration>();
+                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+                
                 try
                 {
                     var context = services.GetRequiredService<BlazorHeroContext>();
+                    
+                    // Use MigrationConnection if available (non-interactive)
+                    var migrationConnStr = configuration.GetConnectionString("MigrationConnection");
+                    var useMigrationConn = !string.IsNullOrEmpty(migrationConnStr);
 
+                    if (useMigrationConn)
+                    {
+                        logger.LogInformation("Using MigrationConnection for database migration (non-interactive).");
+                        context.Database.SetConnectionString(migrationConnStr);
+                    }
+                    else
+                    {
+                        logger.LogInformation("Using DefaultConnection (may be interactive).");
+                    }
                     if (context.Database.IsSqlServer())
                     {
-                        context.Database.Migrate();
+                        await context.Database.MigrateAsync();
+                        logger.LogInformation("Database migration completed successfully.");
                     }
                 }
                 catch (Exception ex)
                 {
-                    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-
                     logger.LogError(ex, "An error occurred while migrating or seeding the database.");
 
                     throw;
