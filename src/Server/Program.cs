@@ -1,12 +1,14 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using BlazorHero.CleanArchitecture.Infrastructure.Contexts;
 using BlazorHero.CleanArchitecture.Server.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog.Core;
 
 namespace BlazorHero.CleanArchitecture.Server
 {
