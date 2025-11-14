@@ -14,6 +14,7 @@ using System.IO;
 using BlazorHero.CleanArchitecture.Server.Filters;
 using BlazorHero.CleanArchitecture.Server.Managers.Preferences;
 using Microsoft.Extensions.Localization;
+using Microsoft.Data.SqlClient; 
 
 namespace BlazorHero.CleanArchitecture.Server
 {
@@ -52,7 +53,7 @@ namespace BlazorHero.CleanArchitecture.Server
             services.AddSharedInfrastructure(_configuration);
             services.RegisterSwagger();
             services.AddInfrastructureMappings();
-            services.AddHangfire(x => x.UseSqlServerStorage(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddHangfire(x => x.UseSqlServerStorage(() => new SqlConnection(_configuration.GetConnectionString("DefaultConnection"))));
             services.AddHangfireServer();
             services.AddControllers().AddValidators();
             services.AddExtendedAttributesValidators();
